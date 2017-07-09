@@ -1,0 +1,30 @@
+version: "3"
+services:
+  redis:
+      image: redis
+      ports:
+        - "6379:6379"
+  mongo-default:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "default_user"
+      MONGO_INITDB_ROOT_PASSWORD: "default_password"
+      MONGO_INITDB_DATABASE: "default"
+    ports:
+      - "27017:27017"
+  mongo-client-1:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "client1_user"
+      MONGO_INITDB_ROOT_PASSWORD: "client1_password"
+      MONGO_INITDB_DATABASE: "client1"
+    ports:
+      - "27018:27017"
+  mongo-client-2:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "client2_user"
+      MONGO_INITDB_ROOT_PASSWORD: "client2_password"
+      MONGO_INITDB_DATABASE: "client-2"
+    ports:
+      - "27019:27017"
