@@ -1,3 +1,7 @@
+# THE WORK IS IN PROGRESS, THE CODE IS NOT STABLE YET
+
+It is under a heavy development, expected delivery date is July 14th, 2017. 
+
 # Mongoid::DynamicClients
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/mongoid/dynamic_clients`. To experiment with that code, run `bin/console` for an interactive prompt.
