@@ -10,7 +10,7 @@ module Mongoid
 
         unless Mongoid::Config.clients[cid]
           Mongoid::Config.clients[cid] = client_config
-          Mongoid::Clients.with_name(cid).reconnect
+          #Mongoid::Clients.with_name(cid).reconnect
         end
 
         Mongoid.override_client(cid)
@@ -20,11 +20,6 @@ module Mongoid
         Mongoid.override_client(previous_client)
       end
     end
-
-    # def with_default_mongoid_client
-    #   Mongoid.override_client(nil)
-    #   yield
-    # end
 
   end
 end
