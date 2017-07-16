@@ -2,14 +2,15 @@
 
 ## Overview
 
-`Mongoid::DynamicClients` helps your MongoId enabled apps talk to multiple MongoDB databases. 
-It is **dynamic** in the sense that you do not necessary have to know the databases you're connecting to beforehand, 
-instead you provide connection properties (i.e. auth. credentials, hosts etc) at runtime so you can get them 
-loaded from a DB or receive from an other source:
-
+`Mongoid::DynamicClients` helps your [MongoId](https://docs.mongodb.com/mongoid/master/#ruby-mongoid-tutorial) enabled 
+apps talk to multiple MongoDB databases. It is **dynamic** in the sense that you do not necessary have to know the 
+databases you're connecting to beforehand, instead you provide connection properties (i.e. auth. credentials, hosts etc) 
+at runtime so you can get them gotten from a DB or receive from an other source. In the example below the connection 
+properties come from the `config` hash:
+ 
 ```ruby
 require "mongoid/dynamic_clients"
-#
+
 # the database to connect to:
 config = { 
   database: "my_custom_db",
@@ -20,7 +21,7 @@ config = {
     auth_source: 'admin'
    }
 }
-#
+
 # connect and execute the block against that database:
 with_mongoid_client(:my_custom_db, config) do
   Record.create!(foo: "bar")
