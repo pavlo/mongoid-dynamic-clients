@@ -16,7 +16,7 @@ require "mongoid/dynamic_clients"
 
 # the database to connect to:
 config = { 
-  database: "my_custom_db",
+  database: 'my_custom_db',
   hosts: ['https://foobar.mongo.com:27017'],
   options: {
     user: 'default_user',
@@ -50,7 +50,7 @@ Or install it yourself as:
 ### Documentation
 
 `Mongoid::DynamicClients` extends [MongoId](https://docs.mongodb.com/mongoid/master/#ruby-mongoid-tutorial) a little bit
-and makes it easier to switch databases at runtime without the need to configure them all in `mongoid.yml` file. This 
+to make it easier to switch databases at runtime without the need to configure them all in `mongoid.yml` file. This 
 is helpful when you do not know the databases you're connecting to at the build time, say you're developing a multi-tenancy
 or a white-labeable application where every tenant has its own database and you do not have the ability to enumerate them
 all in `mongoid.yml`.
@@ -86,9 +86,10 @@ production:
 This is default client/database the application will use when it starts up.
 
 
-#### Override the `default` client
+#### Switch the clients / databases
 
-Using `Mongoid::DynamicClients` gem you can override the `default` client temporary, like this:
+The idea of the `Mongoid::DynamicClients` is to switch the databases at runtime, for this it provides a single `with_mongoid_client` method
+that takes care of the job:
 
 ```ruby
 
@@ -108,7 +109,7 @@ _(the code above assumes that `Record` is a [MongoId document](https://docs.mong
 
 #### Configuring the client
 
-The `with_mongoid_client` method accepts the `config` argument, it is a Hash actually. It is supposed to convey connection 
+The second argument of the `with_mongoid_client` method is a configuration hash. It is supposed to convey connection 
 information for given database. The structure of the config hash is the reflection of the `client` structure seen 
 in `mongoid.yml` file above:
 
@@ -145,6 +146,8 @@ end
 
 ```
 
+_Note: any other client option aavailable in `mongoid.yml` can be specified in the configuration hash, so that's how you
+may configure connection pooling and other options for the clients._
 
 
 ### How it works
@@ -155,6 +158,10 @@ todo: Describe puma setup, how threads are managed and how that affects multi da
 
 #### Integrating with Sidekiq
 todo: Describe the theading model behind sidekiq, provide a code sample of the use of dynamic clients in a sidekiq job
+
+#### Possible traps
+
+todo: It is easy to get out of connection pool limits by passing connection pool configuration to `with_mongoid_client` - explain the danger of that.
 
 ## Contributing
 
