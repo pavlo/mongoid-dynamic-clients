@@ -65,7 +65,7 @@ so both, experienced and regular developers would understand what's going on her
 
 #### The `default` client / database
  
-When MongoId gem is installed and set up, it generates `mongoid.yml` config file. The file features a single client 
+When MongoId gem is installed and set up, it generates a `mongoid.yml` config file. The file features a single client 
 (database) that is used by default and has the name of **_default_**: 
 
 ```yaml
@@ -88,7 +88,7 @@ This is default client/database the application will use when it starts up.
 
 #### Override the `default` client
 
-Using `Mongoid::DynamicClients` gem you can override the `default` client temporary, like this (assuming `Record` is a [MongoId document](https://docs.mongodb.com/mongoid/master/tutorials/mongoid-documents/)):
+Using `Mongoid::DynamicClients` gem you can override the `default` client temporary, like this:
 
 ```ruby
 
@@ -103,6 +103,8 @@ end
 # this goes back to the `default` database
 Record.create!() 
 ```
+
+_(the code above assumes that `Record` is a [MongoId document](https://docs.mongodb.com/mongoid/master/tutorials/mongoid-documents/))_
 
 #### Configuring the client
 
@@ -123,7 +125,7 @@ default:
 
 ```
 
-so, `config` hash should be a structe like this:
+so, `config` hash should be a structure like this:
 
 ```ruby
 
