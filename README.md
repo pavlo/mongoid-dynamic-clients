@@ -1,12 +1,15 @@
 # Mongoid::DynamicClients
 
+todo: Status of development, testing badges, code quality and rubygems version
+
 ## Overview
 
 `Mongoid::DynamicClients` helps your [MongoId](https://docs.mongodb.com/mongoid/master/#ruby-mongoid-tutorial) enabled 
 apps talk to multiple MongoDB databases. It is **dynamic** in the sense that you do not necessary have to know the 
 databases you're connecting to beforehand, instead you provide connection properties (i.e. auth. credentials, hosts etc) 
-at runtime so you can get them gotten from a DB or receive from an other source. In the example below the connection 
-properties come from the `config` hash:
+at runtime so you can get them gotten from a DB or receive from an other source. 
+
+In the example below the connection properties come from the `config` hash:
  
 ```ruby
 require "mongoid/dynamic_clients"
@@ -28,12 +31,6 @@ with_mongoid_client(:my_custom_db, config) do
 end
 ```
 
-## Status
-
-Status of development.
-
-Status of tests of the latest version deployed to rubygems
-
 ### Installation
 
 Add this line to your application's Gemfile:
@@ -50,28 +47,112 @@ Or install it yourself as:
 
     $ gem install mongoid-dynamic_clients
 
-### Overview
+### Documentation
 
-What does it do, why is it useful? 
+`Mongoid::DynamicClients` extends [MongoId](https://docs.mongodb.com/mongoid/master/#ruby-mongoid-tutorial) a little bit
+and makes it easier to switch databases at runtime without the need to configure them all in `mongoid.yml` file. This 
+is helpful when you do not know the databases you're connecting to at the build time, say you're developing a multi-tenancy
+or a white-labeable application where every tenant has its own database and you do not have the ability to enumerate them
+all in `mongoid.yml`.
 
-Clarify terms - databases vs clients
+#### Terms: Clients or Databases?
 
-Example of mongoid.yml with "default" client configured
+Let's put it straight - both `clients` and `databases` terms are used interchangeably in this document. It is because 
+MongoId (and the underlying mongodb driver) use the mention of `client` - a thing that is responsible for maintaining 
+connections to the database and perform basic operations against it. Regular people though would call it `database` - 
+i.e. _let it connect to database A and then connect to database B_... So the document uses the two terms in the same meaning
+so both, experienced and regular developers would understand what's going on here.
 
-Emphasis on the "default" client / database 
+#### The `default` client / database
+ 
+When MongoId gem is installed and set up, it generates `mongoid.yml` config file. The file features a single client 
+(database) that is used by default and has the name of **_default_**: 
+
+```yaml
+production:
+  # Configure available database clients. (required)
+  clients:
+    # Defines the default client. (required)
+    default:
+      database: default
+      hosts:
+        - 'localhost:27017'
+      options:
+        user: 'default_user'
+        password: 'default_password'
+        auth_source: admin
+```
+
+This is default client/database the application will use when it starts up.
 
 
-### Quick Start
-Some verbiage and code samples
+#### Override the `default` client
+
+Using `Mongoid::DynamicClients` gem you can override the `default` client temporary, like this (assuming `Record` is a [MongoId document](https://docs.mongodb.com/mongoid/master/tutorials/mongoid-documents/)):
+
+```ruby
+
+# this goes to the `default` database
+Record.create!()
+
+# queries within the block go to the `my_custom_db` database
+with_mongoid_client(:my_custom_db, config) do
+  Record.create!() 
+end
+
+# this goes back to the `default` database
+Record.create!() 
+```
+
+#### Configuring the client
+
+The `with_mongoid_client` method accepts the `config` argument, it is a Hash actually. It is supposed to convey connection 
+information for given database. The structure of the config hash is the reflection of the `client` structure seen 
+in `mongoid.yml` file above:
+
+```yaml
+
+default:
+  database: default
+  hosts:
+    - 'localhost:27017'
+  options:
+    user: 'default_user'
+    password: 'default_password'
+    auth_source: adminkm
+
+```
+
+so, `config` hash should be a structe like this:
+
+```ruby
+
+config = {
+  database: 'default',
+  hosts: [ 'localhost:27017' ],
+  options: {
+    user: 'default_user',
+    password: 'default_password',
+    auth_source: 'admin'
+  }
+}
+
+with_mongoid_client(:my_custom_db, config) do
+  Record.create!() 
+end
+
+```
+
+
 
 ### How it works
-Explain how Core Mongoid Threaded works, where the clients are stored and how that affects code
+todo: Explain how Core Mongoid Threaded works, where the clients are stored and how that affects code
 
 #### Integrating with Rails 5
-Describe puma setup, how threads are managed and how that affects multi database connections
+todo: Describe puma setup, how threads are managed and how that affects multi database connections
 
 #### Integrating with Sidekiq
-Describe the theading model behind sidekiq, provide a code sample of the use of dynamic clients in a sidekiq job
+todo: Describe the theading model behind sidekiq, provide a code sample of the use of dynamic clients in a sidekiq job
 
 ## Contributing
 
