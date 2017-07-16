@@ -6,7 +6,7 @@ todo: Status of development, testing badges, code quality and rubygems version
 
 `Mongoid::DynamicClients` helps your [MongoId](https://docs.mongodb.com/mongoid/master/#ruby-mongoid-tutorial) enabled 
 apps talk to multiple MongoDB databases. It is **dynamic** in the sense that you do not necessary have to know the 
-databases you're connecting to beforehand, instead you provide connection properties (i.e. auth. credentials, hosts etc) 
+databases you're connecting to beforehand. Instead you provide connection properties (i.e. auth. credentials, hosts etc) 
 at runtime so you can get them gotten from a DB or receive from an other source. 
 
 In the example below the connection properties come from the `config` hash:
@@ -88,8 +88,8 @@ This is default client/database the application will use when it starts up.
 
 #### Switch the clients / databases
 
-The idea of the `Mongoid::DynamicClients` is to switch the databases at runtime, for this it provides a single `with_mongoid_client` method
-that takes care of the job:
+The idea behind the `Mongoid::DynamicClients` is to switch the databases at runtime, for this it provides a single 
+`with_mongoid_client` method that takes care of the job:
 
 ```ruby
 
@@ -146,8 +146,8 @@ end
 
 ```
 
-_Note: any other client option aavailable in `mongoid.yml` can be specified in the configuration hash, so that's how you
-may configure connection pooling and other options for the clients._
+_Note: any other client options available in `mongoid.yml` can be specified in the configuration hash, so that's how you
+may configure connection pooling and other options for the client._
 
 
 ### How it works
