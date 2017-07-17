@@ -1,11 +1,11 @@
 # Mongoid::DynamicClients
 
-todo: Status of development, testing badges, code quality and rubygems version
+[![Build Status](https://semaphoreci.com/api/v1/pavlikus/mongoid-dynamic-clients/branches/develop/badge.svg)](https://semaphoreci.com/pavlikus/mongoid-dynamic-clients)
 
 ## Overview
 
-`Mongoid::DynamicClients` helps your [MongoId](https://docs.mongodb.com/mongoid/master/#ruby-mongoid-tutorial) enabled 
-apps talk to multiple MongoDB databases. It is **dynamic** in the sense that you do not necessary have to know the 
+`Mongoid::DynamicClients` helps [MongoId](https://docs.mongodb.com/mongoid/master/#ruby-mongoid-tutorial) enabled 
+apps to talk to multiple MongoDB databases. It is **dynamic** in the sense that you do not necessary have to know the 
 databases you're connecting to beforehand. Instead you provide connection properties (i.e. auth. credentials, hosts etc) 
 at runtime so you can get them gotten from a DB or receive from an other source. 
 

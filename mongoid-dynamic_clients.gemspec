@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["pavlo"]
   spec.email         = ["pavlikus@gmail.com"]
 
-  spec.summary       = %q{You can now switch MongoDB databases at runtime dynamically}
-  spec.description   = %q{You can now switch MongoDB databases at runtime dynamically}
+  spec.summary       = %q{Helps MongoId enabled apps to talk to multiple MongoDB databases}
+  spec.description   = %q{The gem makes it easier to switch databases at runtime without the need to configure them all in `mongoid.yml` file. This is helpful when you do not know the databases you're connecting to at the build time, say you're developing a multi-tenancy or a white-labeable application where every tenant has its own database and you do not have the ability to enumerate them all in `mongoid.yml`}
   spec.homepage      = "https://github.com/pavlo/mongoid-dynamic-clients"
   spec.license       = "MIT"
 
