@@ -7,7 +7,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: "default_password"
       MONGO_INITDB_DATABASE: "default"
     ports:
-      - "27017:27017"
+      - "37017:27017"
   mongo-client-1:
     image: mongo:latest
     environment:
