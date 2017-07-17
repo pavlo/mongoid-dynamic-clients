@@ -129,7 +129,7 @@ end
 CLIENT_CONFIGS = {
     default: {
         database: "default",
-        hosts: ['localhost:27017'],
+        hosts: ['localhost:37017'],
         options: {
             user: 'default_user',
             password: 'default_password',
